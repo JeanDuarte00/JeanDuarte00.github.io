@@ -1,20 +1,23 @@
-function myAge(){
-    const myBirthYear = 1995;
-    const myBirthMonth = 9;
-    const myBirthDay = 6;
-    
-    var hoje = new Date(),
-        thisDay = hoje.getDay(),
-        thisMonth = hoje.getMonth(),
-        thisYear = hoje.getYear();
-        
-    var result;
-    if(thisMonth >= myBirthMonth && thisDay >= myBirthDay){
-        result = thisYear - myBirthYear;
-    }
-    result = thisYear - myBirthYear - 1;
-    
+// calculate age
+
+function myAge() {
     var tag = document.getElementById("myAge");
-    tag.innerHtml(result);
+    var day = 6, month = 8, year = 1995;
+    var today = new Date();
+    var age ;
     
+    age = today.getFullYear() - year - 1 ;
+    // if completed new year
+    if( today.getMonth() > month ){
+            age++;
+    }else{
+        if(today.getMonth() == month && today.getDate() >= day){
+            age++;
+        }
+        
+    }
+    tag.innerHTML = ( "I'm " + age + " years old," );
 }
+
+
+
