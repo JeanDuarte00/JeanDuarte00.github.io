@@ -3,14 +3,18 @@ function myAge(){
     const myBirthMonth = 9;
     const myBirthDay = 6;
     
-    var hoje = new Date();
-    var thisDay = hoje.getDay();
-    var thisMonth = hoje.getMonth();
-    var thisYear = hoje.getYear();
-    
-    
+    var hoje = new Date(),
+        thisDay = hoje.getDay(),
+        thisMonth = hoje.getMonth(),
+        thisYear = hoje.getYear();
+        
+    var result;
     if(thisMonth >= myBirthMonth && thisDay >= myBirthDay){
-        return thisYear - myBirthYear;
+        result = thisYear - myBirthYear;
     }
-    return thisYear - myBirthYear - 1;
+    result = thisYear - myBirthYear - 1;
+    
+    var tag = document.getElementById("myAge");
+    tag.innerHtml(result);
+    
 }
