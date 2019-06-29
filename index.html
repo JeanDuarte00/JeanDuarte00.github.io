@@ -1,114 +1,26 @@
 <!DOCTYPE html>
-<html>
-	<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Jean Duarte</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="keywords" content="jean, duarte, luccas" />
-	  	
-	<!-- Icone da pág -->
-	<link rel="shortcut icon" href="images/mylogo.png">
 
-	<!-- Google fontes -->
-	<link href='http://fonts.googleapis.com/css?family=Arino:400,300,100,500' rel='stylesheet' type='text/css'>
-	
-	<!-- Animação-->
-	<link rel="stylesheet" href="css/animate.css">
-	
-    <!-- Icomoon-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	
-    <!-- Bootstrap -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-	
-    <!-- Estilo -->
-	<link rel="stylesheet" href="css/style.css">
-	
-    <!-- Modernizr -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- myJs -->
-	<script src="js/myJs.js"></script>
-	
 
-	</head>
-	<body onload = "myAge()" onselectstart="return false" oncontextmenu="return false">
-		
-		<div id="fh5co-portrait" style="background-image: url(images/prog.gif);" data-minheight="500">
-        <div class="overlay"></div>
+<video id="player" controls autoplay></video>
+<button id="capture">Capture</button>
+<canvas id="snapshot" width=320 height=240></canvas>
+<script>
+  var player = document.getElementById('player');
+  var snapshotCanvas = document.getElementById('snapshot');
+  var captureButton = document.getElementById('capture');
 
-            
-            <!-- bt do menu-->
-            <div id="fh5co-toggle" class="js-fh5co-toggle to-animate-single"><a href="#fh5co-bio" class="fh5co-active"><i class="icon-chevron-with-circle-right"></i></a><span id="about-me"> ME</span></div>
-            
-            <div class="to-animate meu-perfil">
-                <img id="perfil" src="images/luccas.jpg" class="img-circle">
-            </div>
-            
-            
-            
-			<div id="fh5co-intro">               
-                
-				<h1>
-                    <span id = "myAge" class="to-animate"></span>
-                    <span class="to-animate">Brazilian,</span>
-                    <span class="to-animate">Designer,</span>    
-                    <span class="to-animate">Computer Science's student, at <a target="_blank" href="http://www.unicap.br/graduacao/pages/?page_id=88">Unicap</a></span>
-                 
-                </h1>
-				
-                
-			</div>
-            
+  var handleSuccess = function(stream) {
+    // Attach the video stream to the video element and autoplay.
+    player.srcObject = stream;
+  };
 
-            
-			<div id="social-animate" class="fh5co-social">
-				<ul>
-					<li><a target="_blank" href="https://www.facebook.com/j34nduarte" class="to-animate"><i class="icon-facebook-with-circle"></i></a></li>
-                    
-                    <li><a target="_blank" href="https://github.com/JeanDuarte00" class="to-animate"><i class="icon-github-with-circle"></i></a></li>	
-                    <li><a target="_blank" href="https://www.linkedin.com/in/jean-duarte-9931a39b?trk=nav_responsive_tab_profile" class="to-animate"><i class="icon-linkedin-with-circle"></i></a></li>
-                    
-                    <li><a target="_blank" href="https://www.facebook.com/j34nduarte" class="to-animate"><i class="icon-skype-with-circle"></i></a></li>
-				</ul>            
-                
-                
-                
-			</div>
-		</div>
-		<div id="fh5co-bio">
-			<div id="fh5co-bio-inner">
-				
-                
-                
-                <p class="to-animate">Hi there, it's Jean Duarte here :) , how are you doing ? I hope you're awesome right there. What brings you  here ? Probably you saw or heard something about me out there.</p>
-                
-                <p class="to-animate">As you know, this world speaks a common language, English, and if you need a help with it, I can do it, no big deal, just talk to me in whatever social media you prefer, I'll do my best to answer as Barry Allen would do :P.</p>
-                
-                <p class="to-animate">Since I was a kid I loved to draw and everything about computers, nowadays I've got some good knowledge about graphic computation at <a target="_blank" href="https://www.saga.art.br/cursos/start/">SAGA </a>the course's name is Start. Now i'm trying to do my best (0.0) at <a target="_blank" href="http://www.unicap.br/graduacao/pages/?page_id=88">University</a>, there I study Computer Science.</p>
-                
-                <p class="to-animate">If you kind had a good felling about me, text me, chat me, call me. I'll be up to help you, see you soon. @_______´´_______@</p>
-                
-                <div class="fh5co-copyright to-animate">                    
-                    <p id="email" >If you need my help or just want to talk, send me an email <a id="email_link" href="mailto:luccasduarte320@gmail.com" >luccasduarte320@gmail.com</a> or call me +55 81 984300016</p>                    
-				</div>  
-                
-			</div>
-			
-		</div>
-		
-		
-		<!-- jQuery -->
-		<script src="js/jquery.min.js"></script>
-		<!-- jQuery Easing -->
-		<script src="js/jquery.easing.1.3.js"></script>
-		<!-- Bootstrap -->
-		<script src="js/bootstrap.min.js"></script>
-		<!-- Waypoints -->
-		<script src="js/jquery.waypoints.min.js"></script>
-		<!-- Main JS -->
-		<script src="js/main.js"></script>
+  captureButton.addEventListener('click', function() {
+    var context = snapshot.getContext('2d');
+    // Draw the video frame to the canvas.
+    context.drawImage(player, 0, 0, snapshotCanvas.width,
+        snapshotCanvas.height);
+  });
 
-	
-	</body>
-</html>
+  navigator.mediaDevices.getUserMedia({video: true})
+      .then(handleSuccess);
+</script>
