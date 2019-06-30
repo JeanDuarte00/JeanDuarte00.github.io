@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+      <meta name="mobile-web-app-capable" content="yes">
+    <meta charset="UTF-8">
+    <title>Tracking Color Blobs in Webcam Feed Using Tracking.js</title>
+    <link rel="stylesheet" href="track.css">
+    
+  </head>
+
+  <body>
+    <audio autoplay loop>
+      <source src="backgrund_music.mp3" type="audio/mpeg">
+    </audio> 
+    
+    <div class="display">
+      <video id="webcam" width="640" height="480" autoplay></video>
+      <canvas id="canvas" width="640" height="480"></canvas>
+      <canvas id="objCanvas" width="640" height="480"></canvas>
+    </div>
+
+    <div id="position">
+      X: <span id="offsetX"></span>
+      Y: <span id="offsetY"></span>
+    </div>
+    <div>
+      Pontuação: <span id="score"></span>
+    </div>
+    
+  </body>
+
+  <script src="tracking-min.js"></script>
+  <script src="track.js"></script>
+
+</html>

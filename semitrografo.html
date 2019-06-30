@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta name="mobile-web-app-capable" content="yes">
+<meta charset="utf8">
+<title>SEMITROGRAFO VIRTUAL</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+<link rel="stylesheet" href="semitrografo.css">
+<script>
+	
+	function events(){
+		
+		alert("load")
+
+		var hide = false;
+		var downloadBtn = document.getElementById("download");
+		var canvas = document.getElementById("canvas");
+		var canvas2 = document.getElementById("canvas2");
+		var context = canvas.getContext("2d");
+		var video = document.getElementById("video");
+		var height = document.getElementById("video").offsetHeight;
+		var width = document.getElementById("video").offsetWidth;
+		var dimension = height-width;
+		
+
+		// Get access to the camera!
+		if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+			// Not adding `{ audio: true }` since we only want video now
+			navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+				//video.src = window.URL.createObjectURL(stream);
+				video.srcObject = stream;
+				video.play();
+			});
+		}
+
+		
+		
+		// DESENHA O GRID DO SEMITROGRAFO
+		document.getElementById("grid").addEventListener("click",function(){
+			alert(height);
+			alert(width);
+			
+			if(canvas.getContext){
+				var context = canvas.getContext("2d");
+				var range = document.getElementById("frequence").value;
+				var n = Number(range);
+				
+				context.clearRect(0,0,width,height);
+				
+				context.strokeStyle = "blue";
+				context.lineWidth = 0.5;
+				context.beginPath();
+				
+				// desenha vertical
+				for(var c=0; c<1000; c+=n){
+					context.moveTo(c, 0);
+					context.lineTo(c, height);
+				}
+					
+				// desenah horizontal
+				for(var c=0; c<1000; c+=n/3){
+					context.moveTo(0, c);
+					context.lineTo(width, c);
+				}
+				
+				
+				context.stroke();
+				context.closePath();
+			}
+		});
+		
+		// CAPTURA FOTO
+		/* document.getElementById("snap").addEventListener("click", function() {
+			context.drawImage(video, 0, 0,300,300);
+		}); */
+	}
+	
+</script>
+
+</head>
+	<body onload="events()">
+
+		<div class="pos-f-t">
+			<div class="collapse" id="navbarToggleExternalContent">
+				<div class="bg-dark p-4">
+					<h4 class="text-white">SISFIS</h4>
+					<span class="text-muted">SEMITROGRAFO VIRTUAL</span>
+					<div id="btns">
+						<button class="btn btn-secondary" id="grid" >APLICAR DISTÂNCIA</button>
+						<input  id="frequence" type="range" placeholder="Valor da distância das linhas">
+					</div>	
+				</div>
+			</div>
+			<nav class="navbar navbar-dark bg-dark">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+				</button>
+			</nav>
+		</div>
+
+		<div class="container">
+			<video id="video"  autoplay></video>
+			<canvas id="canvas"></canvas>
+		</div>
+	
+	</body>
+</html>
