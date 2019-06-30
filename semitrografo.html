@@ -29,7 +29,7 @@
 	
 	function events(){
 		
-		let colors = ["red", "blue", "green"]
+		let colors = ["red", "blue", "green", "orange", "purple", "pink", "brown", "gray"];
 
 		/* alert("load") */
 
@@ -62,29 +62,38 @@
 			if(canvas.getContext){
 				var context = canvas.getContext("2d");
 				var range = document.getElementById("frequence").value;
+				var lineWidth = document.getElementById("lineWidth").value;
 				var n = Number(range);
 				
 				context.clearRect(0,0,width,height);
 				
-				context.strokeStyle = "red";
-				context.lineWidth = 1;
-				context.beginPath();
-				
+				context.lineWidth = lineWidth;				
+
 				
 				// desenha vertical
 				for(var c=0; c<10000; c+=n){
+					context.beginPath();
+					context.strokeStyle = "lightblue";
 					context.moveTo(c, 0);
 					context.lineTo(c, height);
+					context.stroke();
 				}
+
 					
 				// desenah horizontal
-				for(var c=0; c<10000; c+=n){					
+				for(var c=0, cor=0; c<10000; c+=n){
+					if (cor > colors.length-1) {
+						cor = 0;
+					}	
+					console.log(c);	
+					context.beginPath();
+					context.strokeStyle = colors[cor++];
 					context.moveTo(0, c);
 					context.lineTo(width, c);
+					context.stroke();
 				}
 				
 				
-				context.stroke();
 				context.closePath();
 			}
 		});
@@ -104,8 +113,9 @@
 			<a class="navbar-brand" href="#">SEMITROGRAFO VIRTUAL</a>
 			<div id="btns">
 				<button class="btn btn-secondary" id="mirror" onclick="mirrorVideo()">ESPELHAR</button>
-				<button class="btn btn-secondary" id="grid" >APLICAR DISTÂNCIA</button>
-				<input  id="frequence" type="range" placeholder="Valor da distância das linhas" step ="0.25">
+				<button class="btn btn-secondary" id="grid" >APLICAR</button>
+				<input  id="frequence" type="range" placeholder="Valor da distância das linhas" step ="1">
+				<input  id="lineWidth" type="range" placeholder="Valor da grossura das linhas" step ="1" min="1" max="5">
 			</div>
 		</nav>
 		<div class="container">

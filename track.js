@@ -29,8 +29,8 @@ window.addEventListener("load", function(e) {
 
   console.log("Page loaded!");
 
-  // Store the color we will be tracking (selectable by clicking on the webcam feed)
-  var color = {r: 255, g: 255, b: 0}; // yellow colors
+  // rectangle colors to represent where our object is
+  var color = {r: 255, g: 255, b: 00}; // yellow color
 
  
 
@@ -42,14 +42,12 @@ window.addEventListener("load", function(e) {
   tracker.on('track', function(e) {
 
 
-    
-
     objContext.clearRect(0, 0, objCanvas.width, objCanvas.height);
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     drawObj(objContext, position);
 
-    //if (e.data.length !== 0) {
+    if (e.data.length !== 0) {
 
 
       e.data.forEach(function(rect) {        
@@ -68,7 +66,7 @@ window.addEventListener("load", function(e) {
         }
       });
 
-   // }
+    }
 
   });
 
@@ -110,7 +108,7 @@ function drawRect(rect, ctx, color) {
   ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
 
   ctx.beginPath();
-  ctx.arc( rect.x, rect.y, 10, 0, 2 * Math.PI);
+  ctx.arc( rect.x, rect.y, 5, 0, 2 * Math.PI);
   ctx.stroke(); 
 
   var offsetY = document.getElementById("offsetY");
@@ -122,7 +120,7 @@ function drawRect(rect, ctx, color) {
 }
 
 function drawObj( ctx, axi ){
-  ctx.strokeStyle = "rgb(255,255,0)";
+  ctx.strokeStyle = "red";
   ctx.fillRect(axi.x, axi.y, axi.width, axi.height);
 
 }
