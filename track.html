@@ -7,7 +7,10 @@
     <meta charset="UTF-8">
     <title>MiniGame</title>
     <link rel="stylesheet" href="track.css">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   </head>
 
   <body>
@@ -21,13 +24,22 @@
       <canvas id="objCanvas" width="640" height="480"></canvas>
     </div>
 
-    <div id="position">
-      X: <span id="offsetX"></span>
-      Y: <span id="offsetY"></span>
-    </div>
-    <div>
-      Pontuação: <span id="score"></span>
-    </div>
+    
+
+    <nav class="navbar fixed-bottom navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">TRACKER</a>
+      <a href="index.html"><i class="material-icons large">home</i></a>
+      <div>
+          <div id="position">
+              X: <span id="offsetX"></span>
+              Y: <span id="offsetY"></span>
+              <div>
+                Pontuação: <span id="score"></span>
+              </div>  
+          </div>
+            
+      </div>
+    </nav>
     
   </body>
 
