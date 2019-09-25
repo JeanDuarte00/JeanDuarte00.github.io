@@ -5,7 +5,7 @@ let poses = [];
 let ellipseSize;
 
 function setup() {
-  createCanvas(1366, 638);
+  createCanvas(500, 400);
   video = createCapture(VIDEO);
   video.size(width, height);
 
@@ -71,5 +71,44 @@ function drawSkeleton() {
       line(partA.position.x, partA.position.y, partB.position.x, partB.position.y);
       
     }
+  }
+}
+
+function semitrografo() {
+  console.log("VIDEO:", video);
+  if(video.getContext){
+    
+    var n = 10;
+    
+    context.clearRect(0,0,width,height);
+    
+    context.lineWidth = lineWidth;				
+
+    
+    // desenha vertical
+    for(var c=0; c<10000; c+=n){
+      context.beginPath();
+      context.strokeStyle = "lightblue";
+      context.moveTo(c, 0);
+      context.lineTo(c, height);
+      context.stroke();
+    }
+
+      
+    // desenah horizontal
+    for(var c=0, cor=0; c<10000; c+=n){
+      if (cor > colors.length-1) {
+        cor = 0;
+      }	
+      console.log(c);	
+      context.beginPath();
+      context.strokeStyle = colors[cor++];
+      context.moveTo(0, c);
+      context.lineTo(width, c);
+      context.stroke();
+    }
+    
+    
+    context.closePath();
   }
 }
